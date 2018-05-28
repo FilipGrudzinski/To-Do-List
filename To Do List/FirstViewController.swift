@@ -13,7 +13,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var table: UITableView!
     
-    var items: [String] = [] // 
+    var items: [String] = []
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -48,6 +48,18 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         table.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            
+            items.remove(at: indexPath.row)
+            table.reloadData()
+            UserDefaults.standard.set(items, forKey: "items")
+            
+            
+        }
     }
     
     /*
