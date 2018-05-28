@@ -33,7 +33,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
         
         UserDefaults.standard.set(items, forKey: "items")
         
-        textField.text = ""
+        textField.text = " "
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
