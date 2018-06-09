@@ -12,29 +12,71 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
     
-    
+
     @IBAction func addButton(_ sender: Any) {
         
-        let itemsObject = UserDefaults.standard.object(forKey: "items")
-        
-        var items: [String]
-        
-        if let tempItems = itemsObject as? [String] {
+        if (textField.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             
-            items = tempItems
+            textField.placeholder = "Enter your item"
+            textField.text = nil
             
-            items.append(textField.text!)
- 
         } else {
             
-             items = [textField.text!]
+           // if textField.text != nil && textField.text != "" {
+                
+                let itemsObject = UserDefaults.standard.object(forKey: "items")
+                
+                var items: [String]
+                
+                if let tempItems = itemsObject as? [String] {
+                    
+                    items = tempItems
+                    
+                    items.append(textField.text!)
+                    
+                } else {
+                    
+                    items = [textField.text!]
+                    
+                }
+                
+                UserDefaults.standard.set(items, forKey: "items")
+                textField.placeholder = "New todo?"
+                textField.text = nil
+                
+           // }
             
         }
         
-        UserDefaults.standard.set(items, forKey: "items")
+         /* if textField.text != nil && (textField.text?.isEmpty)!{
         
-        textField.text = " "
-    }
+            let itemsObject = UserDefaults.standard.object(forKey: "items")
+        
+            var items: [String]
+        
+            if let tempItems = itemsObject as? [String] {
+            
+                items = tempItems
+            
+                items.append(textField.text!)
+ 
+            } else {
+            
+                items = [textField.text!]
+            
+            }
+        
+            UserDefaults.standard.set(items, forKey: "items")
+            textField.placeholder = "New todo?"
+            textField.text = nil
+          
+        }*/
+       
+     }
+    
+    
+
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
